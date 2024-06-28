@@ -14,6 +14,7 @@ jobs:
       - name: checkout
         uses: actions/checkout@v3
         with: 
+          token: ${{ secrets.WORKFLOW_ACCESS_TOKEN }}
           fetch-depth: 0
 
       - name: git config
@@ -24,7 +25,9 @@ jobs:
       - name: pull branch
         run: |
           git remote add upstream $(jq -r .upstream < .upstream )
-          git pull --rebase upstream $(jq -r .branch < .upstream)
+          readonly branch=$(jq -r .branch < .upstream)
+          git fetch upstream "$branch"
+          git rebase -Xtheirs upstream/"$branch"
 
       - name: push branch
         run: |
