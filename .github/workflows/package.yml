@@ -37,7 +37,7 @@ jobs:
         run: |
           set -euo pipefail
 
-          wget https://raw.githubusercontent.com/BigWigsMods/packager/7cd7fe5fede4ca80f63742e6bc1d777914814380/release.sh -qO $HOME/release
+          wget https://raw.githubusercontent.com/BigWigsMods/packager/f3c020b3e9fdbae44a0f179f15f74e8f39afbdff/release.sh -qO $HOME/release
           sed -i '/$GITHUB_EVENT_NAME == "push" && $GITHUB_REF == "refs\/heads"*/c\\tif false; then' $HOME/release
           chmod u+x $HOME/release
 
